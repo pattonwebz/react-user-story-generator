@@ -1,6 +1,40 @@
 import React from "react"
 
+import styled from 'styled-components'
+
 const FormInputs = () => {
+
+    const FormEl = styled.form`
+        flex: 0 0 50%;
+    `;
+
+    const SubmitButton = styled.input`
+        color: #fff;
+        background-color: #000;
+        margin: 1rem 0;
+        padding: 0.5rem 2.5rem;
+        border: none;
+        &:hover,
+        &:focus {
+            background: lighten(#000, 35%);
+        }
+    `;
+
+    const InputTextarea = styled.textarea`
+        padding: 0.5rem 0.25rem;
+    `;
+
+    const TextareaAsA = styled(InputTextarea)`
+        border-color: red;
+    `;
+
+    const TextareaIWantTo = styled(InputTextarea)`
+        border-color: green;
+    `;
+
+    const TextareaSoThat = styled(InputTextarea)`
+        border-color: blue;
+    `;
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
@@ -8,26 +42,27 @@ const FormInputs = () => {
     }
 
     return(
-        <form
+        <FormEl
             className="form--inputform"
             onSubmit={handleSubmit}
         >
             <fieldset>
+                <legend>Enter your story details</legend>
                 <label>
                     <p>As a...</p>
-                    <textarea name="story-as-a" />
+                    <TextareaAsA name="story-as-a" />
                 </label>
                 <label>
                     <p>i want to...</p>
-                    <textarea name="story-i-want-to" />
+                    <TextareaIWantTo name="story-i-want-to" />
                 </label>
                 <label>
                     <p>so that...</p>
-                    <textarea name="story-so-that" />
+                    <TextareaSoThat name="story-so-that" />
                 </label>
             </fieldset>
-            <input type="submit" value="Submit" />
-        </form>
+            <SubmitButton type="submit" value="Submit" />
+        </FormEl>
     )
 }
 
