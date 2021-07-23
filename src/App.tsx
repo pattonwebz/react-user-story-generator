@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import HomePage from './pages/homePage';
-import AboutPage from './pages/aboutPage';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
 import Header from './layoutComponents/Header';
 
