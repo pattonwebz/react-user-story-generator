@@ -1,13 +1,24 @@
 import React from "react"
-import FormInputs from '../components/FormInputs';
 
- const HomePage = () => {
+import styled from "styled-components";
+
+import FormInputs from '../components/FormInputs';
+import CanvasOutput from '../components/CanvasOutput';
+
+const HomePage = () => {
+
+    const FlexWrapper = styled.section`
+        display: flex;
+    `;
     return (
         <>
             <section>
                 <h2>Homepage Header</h2>
                 <p>Some page content</p>
-                <FormInputs />
+                <FlexWrapper>
+                    <FormInputs />
+                    <CanvasOutput />
+                </FlexWrapper>
             </section>
         </>
     )
