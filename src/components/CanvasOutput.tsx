@@ -32,6 +32,8 @@ const CanvasOutput = (props: any) => {
 
     useEffect(() => {
 
+        setBackground();
+
         writeText({ text: 'From: UserStoryGenerator.com', x: 300, y: 320 }, {textAlign: 'center', fontSize: '0.75rem'});
 
         writeText({ text: 'As A...', x: 30, y: 55 }, {color: 'red', fontSize: '1.25rem'});
@@ -44,6 +46,22 @@ const CanvasOutput = (props: any) => {
         writeText({ text: props.cardValues.storySoThat, x: 40, y: 280 });
 
     }, [props.cardValues]);
+
+    const setBackground = () => {
+
+        if (null === ctx || null === canvasRef) {
+            return;
+        }
+
+        const canvas = canvasRef.current;
+        if(!canvas) {
+            return;
+        }
+
+        ctx.fillStyle = 'beige';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    }
 
     // write a text
     const writeText = (info: { text: string; x: number; y: number; }, style = {}) => {
