@@ -1,44 +1,49 @@
-import React from "react"
+import React, { useReducer, useState } from "react";
 
-import styled from 'styled-components'
+import { InputTextarea, FormEl, SubmitButton } from "../styledElements/formElements";
 
-const FormInputs = () => {
+import styled from "styled-components";
 
-    const FormEl = styled.form`
-        flex: 0 0 50%;
-    `;
+const TextareaAsA = styled(InputTextarea)`
+    border-color: red;
+`;
 
-    const SubmitButton = styled.input`
-        color: #fff;
-        background-color: #000;
-        margin: 1rem 0;
-        padding: 0.5rem 2.5rem;
-        border: none;
-        &:hover,
-        &:focus {
-            background: lighten(#000, 35%);
-        }
-    `;
+const TextareaIWantTo = styled(InputTextarea)`
+    border-color: green;
+`;
 
-    const InputTextarea = styled.textarea`
-        padding: 0.5rem 0.25rem;
-    `;
+const TextareaSoThat = styled(InputTextarea)`
+    border-color: blue;
+`;
 
-    const TextareaAsA = styled(InputTextarea)`
-        border-color: red;
-    `;
+const formReducer = (initialValues: {[key: string]: string}, updatedValues: {name: string; value: string;} ) => {
+    const reducedState = {
+        ...initialValues,
+        [updatedValues.name]: updatedValues.value
+    };
 
-    const TextareaIWantTo = styled(InputTextarea)`
-        border-color: green;
-    `;
+    return reducedState;
+}
 
-    const TextareaSoThat = styled(InputTextarea)`
-        border-color: blue;
-    `;
+const FormInputs = (props: any) => {
+
+    const [formData, setFormData] = useReducer(formReducer, props.cardValues);
+    const [submitting, setSubmitting] = useState(false);
+
+    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const target = event.currentTarget as HTMLTextAreaElement;
+        setFormData({
+            name: target.name,
+            value: target.value,
+        });
+        props.cardValues[target.name] = target.value;
+    };
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
-        alert('You have submitted the form.')
+        setSubmitting(true);
+        props.dataCallback(props.cardValues);
+        setSubmitting(false);
     }
 
     return(
@@ -46,22 +51,22 @@ const FormInputs = () => {
             className="form--inputform"
             onSubmit={handleSubmit}
         >
-            <fieldset>
+            <fieldset disabled={submitting}>
                 <legend>Enter your story details</legend>
                 <label>
                     <p>As a...</p>
-                    <TextareaAsA name="story-as-a" />
+                    <TextareaAsA name='storyAsA' onChange={handleChange} value={formData.storyAsA || ''} />
                 </label>
                 <label>
                     <p>i want to...</p>
-                    <TextareaIWantTo name="story-i-want-to" />
+                    <TextareaIWantTo name='storyIWantTo' onChange={handleChange} value={formData.storyIWantTo || ''} />
                 </label>
                 <label>
                     <p>so that...</p>
-                    <TextareaSoThat name="story-so-that" />
+                    <TextareaSoThat name='storySoThat' onChange={handleChange} value={formData.storySoThat || ''} />
                 </label>
             </fieldset>
-            <SubmitButton type="submit" value="Submit" />
+            <SubmitButton type="submit" value="Submit" disabled={submitting} />
         </FormEl>
     )
 }
