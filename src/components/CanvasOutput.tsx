@@ -2,16 +2,7 @@ import React, { useRef, useEffect, useCallback, createRef, useState } from "reac
 import CSS from 'csstype';
 
 import styled from 'styled-components'
-
-const CanvasWrapper = styled.div`
-    flex: 0 0 50%;
-`;
-
-const CanvasEl = styled.canvas`
-    width: 100%;
-    max-width: 600px;
-    height: 335px;
-`;
+import { CanvasWrapper, CanvasEl } from "../styledElements/canvasElements";
 
 const CanvasOutput = (props: any) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
