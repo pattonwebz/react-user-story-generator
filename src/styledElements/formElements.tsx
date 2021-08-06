@@ -18,4 +18,6 @@ export const SubmitButton = styled.input`
 
 export const InputTextarea = styled.textarea`
     padding: 0.5rem 0.25rem;
+    box-sizing: border-box;
+    width: 100%;
 `;
