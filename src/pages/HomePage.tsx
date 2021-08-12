@@ -6,8 +6,8 @@ const HomePage = () => {
 
     return (
         <>
-            <h2>Homepage Header</h2>
-            <p>Some page content</p>
+            <h2>Generate User Stories</h2>
+            <p>Make your stories which you can save as images.</p>
 
             <CardWrapper />
         </>
