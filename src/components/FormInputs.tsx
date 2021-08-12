@@ -1,4 +1,6 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useContext } from "react";
+
+import CardContext from '../context/CardContext';
 
 import { InputTextarea, FormEl, SubmitButton } from "../styledElements/formElements";
 
@@ -16,18 +18,20 @@ const TextareaSoThat = styled(InputTextarea)`
     border-color: blue;
 `;
 
-const formReducer = (initialValues: {[key: string]: string}, updatedValues: {name: string; value: string;} ) => {
-    const reducedState = {
-        ...initialValues,
-        [updatedValues.name]: updatedValues.value
-    };
-
-    return reducedState;
-}
-
 const FormInputs = (props: any) => {
 
-    const [formData, setFormData] = useReducer(formReducer, props.cardValues);
+    const cardValues = useContext(CardContext);
+
+    const formReducer = (initialValues: {[key: string]: string}, updatedValues: {name: string; value: string;} ) => {
+        const reducedState = {
+            ...initialValues,
+            [updatedValues.name]: updatedValues.value
+        };
+
+        return reducedState;
+    }
+
+    const [formData, setFormData] = useReducer(formReducer, cardValues);
     const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -36,13 +40,14 @@ const FormInputs = (props: any) => {
             name: target.name,
             value: target.value,
         });
-        props.cardValues[target.name] = target.value;
+        cardValues[target.name] = target.value;
     };
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
         setSubmitting(true);
-        props.dataCallback(props.cardValues);
+        setTimeout(() => {}, 3000);
+        props.reRenderCanvasCallback();
         setSubmitting(false);
     }
 

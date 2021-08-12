@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
+
+import { CardContextProvider, initialCardValues } from '../context/CardContext';
 
 import FormInputs from '../components/FormInputs';
 import CanvasOutput from '../components/CanvasOutput';
@@ -11,32 +13,20 @@ const CardSection = styled.section`
 
 const CardWrapper = () => {
 
-    interface CardValuesInterface {
-        [s: string]: string;
-    }
-
-    const initialCardValues: CardValuesInterface = {
-        storyAsA: '',
-        storyIWantTo: '',
-        storySoThat: '',
-    }
-
-    const [cardValues, setCardValues] = useState(initialCardValues);
     const [lastRender, setLastRender] = useState(0);
 
-    const updateCardValues = (values: CardValuesInterface) => {
-        setCardValues(values);
+    const triggerReRenderCanvas = () => {
         setLastRender(new Date().getTime());
     }
 
-
-
-
     return(
-        <CardSection>
-            <FormInputs cardValues={cardValues} dataCallback={updateCardValues} />
-            <CanvasOutput cardValues={cardValues} key={lastRender} />
-        </CardSection>
+        <CardContextProvider value={initialCardValues}>
+            <CardSection>
+                <FormInputs reRenderCanvasCallback={triggerReRenderCanvas} />
+                <CanvasOutput key={lastRender} />
+            </CardSection>
+        </CardContextProvider>
+
     )
 }
 

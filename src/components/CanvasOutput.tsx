@@ -1,14 +1,19 @@
-import React, { useRef, useEffect, useCallback, createRef, useState } from "react"
+import React, { useRef, useEffect, useContext } from "react"
 import CSS from 'csstype';
 
-import styled from 'styled-components'
+import CardContext, { CardValuesInterface } from '../context/CardContext';
+
 import { CanvasWrapper, CanvasEl } from "../styledElements/canvasElements";
 
-const CanvasOutput = (props: any) => {
+const CanvasOutput = () => {
+
+    const cardValues = useContext(CardContext);
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     let ctx: CanvasRenderingContext2D | null = null;
 
     useEffect(() => {
+
         // dynamically assign the width and height to canvas
         const canvasEle = canvasRef.current;
 
@@ -19,24 +24,21 @@ const CanvasOutput = (props: any) => {
         canvasEle.height = canvasEle.clientHeight;
 
         ctx = canvasEle.getContext('2d');
-    }, []);
-
-    useEffect(() => {
 
         setBackground();
 
         writeText({ text: 'From: UserStoryGenerator.com', x: 300, y: 320 }, {textAlign: 'center', fontSize: '0.75rem'});
 
         writeText({ text: 'As A...', x: 30, y: 55 }, {color: 'red', fontSize: '1.25rem'});
-        writeText({ text: props.cardValues.storyAsA, x: 40, y: 80 });
+        writeText({ text: cardValues.storyAsA, x: 40, y: 80 });
 
         writeText({ text: 'I Want To...', x: 30, y: 155 }, {color: 'green', fontSize: '1.25rem'});
-        writeText({ text: props.cardValues.storyIWantTo, x: 40, y: 180 });
+        writeText({ text: cardValues.storyIWantTo, x: 40, y: 180 });
 
         writeText({ text: 'So That...', x: 30, y: 255 }, {color: 'blue', fontSize: '1.25rem'});
-        writeText({ text: props.cardValues.storySoThat, x: 40, y: 280 });
+        writeText({ text: cardValues.storySoThat, x: 40, y: 280 });
 
-    }, [props.cardValues]);
+    }, [cardValues]);
 
     const setBackground = () => {
 
