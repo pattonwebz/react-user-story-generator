@@ -7,12 +7,8 @@ import { CardContextProvider, initialCardValues } from '../context/CardContext';
 import FormInputs from '../components/FormInputs';
 import CanvasOutput from '../components/CanvasOutput';
 
-import styled from 'styled-components'
 import {CardFormErrorFallback, CardCanvasErrorFallback } from "../errorBoundry/Fallbacks";
-
-const CardSection = styled.section`
-    display: flex;
-`;
+import { CardSection } from '../styledElements/cardWrapperElements';
 
 const handleCardError = (error: Error, info: {componentStack: string}) => {
     console.log(error);
