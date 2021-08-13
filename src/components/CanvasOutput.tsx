@@ -14,7 +14,7 @@ const CanvasOutput = () => {
 
     useEffect(() => {
 
-        // dynamically assign the width and height to canvas
+        // throw 'broken';
         const canvasEle = canvasRef.current;
 
         if(null === canvasEle) {

@@ -5,7 +5,7 @@ import CardContext from '../context/CardContext';
 import { FormEl, SubmitButton, TextareaAsA, TextareaIWantTo, TextareaSoThat } from "../styledElements/formElements";
 
 const FormInputs = (props: any) => {
-
+    // throw 'broken';
     const cardValues = useContext(CardContext);
 
     const formReducer = (initialValues: {[key: string]: string}, updatedValues: {name: string; value: string;} ) => {
