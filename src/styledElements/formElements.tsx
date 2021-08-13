@@ -21,3 +21,15 @@ export const InputTextarea = styled.textarea`
     box-sizing: border-box;
     width: 100%;
 `;
+
+export const TextareaAsA = styled(InputTextarea)`
+    border-color: red;
+`;
+
+export const TextareaIWantTo = styled(InputTextarea)`
+    border-color: green;
+`;
+
+export const TextareaSoThat = styled(InputTextarea)`
+    border-color: blue;
+`;

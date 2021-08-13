@@ -2,21 +2,7 @@ import React, { useReducer, useState, useContext } from "react";
 
 import CardContext from '../context/CardContext';
 
-import { InputTextarea, FormEl, SubmitButton } from "../styledElements/formElements";
-
-import styled from "styled-components";
-
-const TextareaAsA = styled(InputTextarea)`
-    border-color: red;
-`;
-
-const TextareaIWantTo = styled(InputTextarea)`
-    border-color: green;
-`;
-
-const TextareaSoThat = styled(InputTextarea)`
-    border-color: blue;
-`;
+import { FormEl, SubmitButton, TextareaAsA, TextareaIWantTo, TextareaSoThat } from "../styledElements/formElements";
 
 const FormInputs = (props: any) => {
 
