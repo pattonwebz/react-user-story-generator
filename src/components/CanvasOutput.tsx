@@ -5,7 +5,7 @@ import CardContext, { CardValuesInterface } from '../context/CardContext';
 
 import { CanvasWrapper, CanvasEl } from "../styledElements/canvasElements";
 
-const CanvasOutput = () => {
+const CanvasOutput = React.memo(() => {
 
     const cardValues = useContext(CardContext);
 
@@ -77,6 +77,6 @@ const CanvasOutput = () => {
             <CanvasEl ref={canvasRef}></CanvasEl>
         </CanvasWrapper>
     )
-}
+});
 
 export default CanvasOutput;
